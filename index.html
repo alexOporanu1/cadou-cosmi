@@ -1,0 +1,830 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+    <title>La Mulți Ani, Cosmina 🌹</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Raleway:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        *, *::before, *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        :root {
+            --cream: #fdf6f0;
+            --blush: #f2d7d9;
+            --rose: #c9848f;
+            --deep-rose: #9e5a65;
+            --mauve: #7a4f57;
+            --gold: #c9a87c;
+            --dark: #3d2b35;
+            --light-text: #7a6570;
+        }
+
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: 'Raleway', sans-serif;
+            background-color: var(--cream);
+            color: var(--dark);
+            font-size: 16px;
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* ── NAV ── */
+        nav {
+            position: fixed;
+            top: 0; left: 0; right: 0;
+            z-index: 100;
+            background: rgba(253, 246, 240, 0.94);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            padding: 12px 16px;
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            border-bottom: 1px solid rgba(201, 132, 143, 0.18);
+        }
+        nav a {
+            text-decoration: none;
+            color: var(--mauve);
+            font-size: 11px;
+            font-weight: 600;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            transition: color 0.3s;
+        }
+        nav a:hover { color: var(--rose); }
+
+        /* ── SECTIONS ── */
+        section {
+            padding: 80px 24px 60px;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        h2.section-title {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(1.6rem, 6vw, 2rem);
+            color: var(--deep-rose);
+            text-align: center;
+            margin-bottom: 6px;
+        }
+        .section-subtitle {
+            text-align: center;
+            color: var(--light-text);
+            font-size: 13px;
+            font-weight: 300;
+            margin-bottom: 36px;
+            letter-spacing: 0.5px;
+        }
+
+        /* ── HERO ── */
+        #hero {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 80px 24px 40px;
+            background: linear-gradient(180deg, #fff5f5 0%, var(--cream) 100%);
+            position: relative;
+            overflow: hidden;
+        }
+        #hero::before {
+            content: '';
+            position: absolute;
+            top: -60px; left: -60px;
+            width: 220px; height: 220px;
+            background: radial-gradient(circle, rgba(242,215,217,0.55), transparent 70%);
+            border-radius: 50%;
+            pointer-events: none;
+        }
+        #hero::after {
+            content: '';
+            position: absolute;
+            bottom: -60px; right: -60px;
+            width: 260px; height: 260px;
+            background: radial-gradient(circle, rgba(201,168,124,0.25), transparent 70%);
+            border-radius: 50%;
+            pointer-events: none;
+        }
+        .hero-tag {
+            font-size: 11px;
+            font-weight: 600;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: var(--gold);
+            margin-bottom: 14px;
+            animation: fadeInDown 0.8s ease both;
+        }
+        .hero-name {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(3.2rem, 18vw, 5.5rem);
+            color: var(--deep-rose);
+            line-height: 1.05;
+            animation: fadeInUp 0.8s ease 0.2s both;
+        }
+        .hero-name em {
+            font-style: italic;
+            color: var(--rose);
+        }
+        .hero-desc {
+            font-size: 15px;
+            color: var(--light-text);
+            font-weight: 300;
+            margin: 14px 0 36px;
+            animation: fadeInUp 0.8s ease 0.4s both;
+        }
+        .float-emoji {
+            font-size: 2.8rem;
+            animation: float 3s ease-in-out infinite;
+            display: inline-block;
+            margin-bottom: 14px;
+        }
+
+        /* ── COUNTDOWN ── */
+        .countdown-wrapper {
+            animation: fadeInUp 0.8s ease 0.6s both;
+        }
+        .countdown-label {
+            font-size: 11px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--light-text);
+            margin-bottom: 14px;
+        }
+        .countdown {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+        }
+        .countdown-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background: white;
+            border: 1px solid rgba(201,132,143,0.25);
+            border-radius: 14px;
+            padding: 14px 16px;
+            min-width: 62px;
+            box-shadow: 0 2px 14px rgba(158,90,101,0.08);
+        }
+        .countdown-number {
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--deep-rose);
+            line-height: 1;
+        }
+        .countdown-unit {
+            font-size: 9px;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            color: var(--light-text);
+            margin-top: 5px;
+        }
+        .birthday-msg {
+            display: none;
+            font-family: 'Playfair Display', serif;
+            font-size: 1.6rem;
+            color: var(--deep-rose);
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        /* ── TIMELINE ── */
+        .timeline {
+            position: relative;
+            padding-left: 34px;
+        }
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 10px; top: 0; bottom: 0;
+            width: 2px;
+            background: linear-gradient(to bottom, var(--blush), var(--rose), var(--blush));
+        }
+        .timeline-item {
+            position: relative;
+            margin-bottom: 34px;
+            opacity: 0;
+            transform: translateX(-18px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+        .timeline-item.visible {
+            opacity: 1;
+            transform: translateX(0);
+        }
+        .timeline-dot {
+            position: absolute;
+            left: -29px; top: 4px;
+            width: 14px; height: 14px;
+            border-radius: 50%;
+            background: var(--rose);
+            border: 3px solid var(--cream);
+            box-shadow: 0 0 0 2px var(--rose);
+        }
+        .timeline-date {
+            font-size: 10px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--gold);
+            font-weight: 600;
+            margin-bottom: 4px;
+        }
+        .timeline-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.1rem;
+            color: var(--dark);
+            margin-bottom: 4px;
+        }
+        .timeline-text {
+            font-size: 14px;
+            color: var(--light-text);
+            font-weight: 300;
+        }
+
+        /* ── GALLERY ── */
+        /*
+            Pentru a adăuga poze reale, înlocuiește:
+              <div class="gallery-placeholder">...</div>
+            cu:
+              <img src="poza_ta.jpg" alt="descriere">
+            în fiecare .gallery-item
+        */
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+        }
+        .gallery-item {
+            aspect-ratio: 1;
+            border-radius: 14px;
+            overflow: hidden;
+            background: var(--blush);
+            box-shadow: 0 4px 16px rgba(158,90,101,0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .gallery-item:active { transform: scale(0.97); }
+        .gallery-item.wide {
+            grid-column: span 2;
+            aspect-ratio: 16/9;
+        }
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+        .gallery-placeholder {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: var(--rose);
+            font-size: 11px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            gap: 8px;
+        }
+        .gallery-placeholder svg { opacity: 0.35; }
+
+        /* ── QUIZ ── */
+        .quiz-card {
+            background: white;
+            border-radius: 20px;
+            padding: 28px 22px;
+            box-shadow: 0 4px 24px rgba(158,90,101,0.08);
+        }
+        .quiz-progress {
+            display: flex;
+            gap: 6px;
+            justify-content: center;
+            margin-bottom: 22px;
+        }
+        .q-dot {
+            width: 8px; height: 8px;
+            border-radius: 50%;
+            background: var(--blush);
+            transition: background 0.3s;
+        }
+        .q-dot.active  { background: var(--rose); }
+        .q-dot.done    { background: var(--gold); }
+        .quiz-question {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.1rem;
+            color: var(--dark);
+            text-align: center;
+            margin-bottom: 18px;
+            line-height: 1.45;
+        }
+        .quiz-options {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        .quiz-option {
+            padding: 13px 16px;
+            border: 1.5px solid rgba(201,132,143,0.28);
+            border-radius: 12px;
+            background: var(--cream);
+            font-family: 'Raleway', sans-serif;
+            font-size: 14px;
+            color: var(--dark);
+            cursor: pointer;
+            transition: all 0.2s ease;
+            text-align: left;
+            -webkit-appearance: none;
+        }
+        .quiz-option:hover:not(:disabled) {
+            border-color: var(--rose);
+            background: #fff5f5;
+        }
+        .quiz-option.correct {
+            border-color: #7cb87a;
+            background: #f0faf0;
+            color: #3a6b38;
+        }
+        .quiz-option.wrong {
+            border-color: #e07070;
+            background: #fff0f0;
+            color: #7a3030;
+        }
+        .quiz-feedback {
+            text-align: center;
+            font-size: 13px;
+            color: var(--light-text);
+            margin-top: 14px;
+            min-height: 18px;
+            font-style: italic;
+            line-height: 1.4;
+        }
+        .quiz-next {
+            display: none;
+            width: 100%;
+            margin-top: 18px;
+            padding: 14px;
+            background: linear-gradient(135deg, var(--rose), var(--deep-rose));
+            color: white;
+            border: none;
+            border-radius: 12px;
+            font-family: 'Raleway', sans-serif;
+            font-size: 14px;
+            font-weight: 600;
+            letter-spacing: 0.8px;
+            cursor: pointer;
+            transition: opacity 0.2s;
+        }
+        .quiz-next:hover { opacity: 0.88; }
+        .quiz-result {
+            display: none;
+            text-align: center;
+        }
+        .result-emoji  { font-size: 3rem; margin-bottom: 8px; }
+        .result-score  {
+            font-family: 'Playfair Display', serif;
+            font-size: 3.5rem;
+            color: var(--deep-rose);
+            line-height: 1;
+        }
+        .result-text {
+            font-size: 14px;
+            color: var(--light-text);
+            margin-top: 10px;
+            line-height: 1.5;
+        }
+
+        /* ── LETTER ── */
+        #message { background: linear-gradient(135deg, #fff5f5, var(--cream)); }
+        .letter {
+            background: white;
+            border-radius: 20px;
+            padding: 36px 26px;
+            box-shadow: 0 4px 24px rgba(158,90,101,0.1);
+            border: 1px solid rgba(201,132,143,0.18);
+            position: relative;
+        }
+        .letter::before {
+            content: '\201C';
+            font-family: 'Playfair Display', serif;
+            font-size: 7rem;
+            color: var(--blush);
+            position: absolute;
+            top: -16px; left: 14px;
+            line-height: 1;
+            pointer-events: none;
+        }
+        .letter p {
+            font-size: 15px;
+            color: var(--dark);
+            line-height: 1.85;
+            font-weight: 300;
+            margin-bottom: 16px;
+        }
+        .letter-sign {
+            font-family: 'Playfair Display', serif;
+            font-style: italic;
+            font-size: 1.2rem;
+            color: var(--rose);
+            text-align: right;
+            margin-top: 20px;
+        }
+
+        /* ── FOOTER ── */
+        footer {
+            text-align: center;
+            padding: 28px 24px 48px;
+            font-size: 12px;
+            color: var(--light-text);
+            letter-spacing: 0.8px;
+        }
+        footer .heart { color: var(--rose); }
+
+        /* ── ANIMATIONS ── */
+        @keyframes fadeInDown {
+            from { opacity: 0; transform: translateY(-20px); }
+            to   { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to   { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50%       { transform: translateY(-10px); }
+        }
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50%       { transform: scale(1.04); }
+        }
+    </style>
+</head>
+<body>
+
+<nav>
+    <a href="#hero">Acasă</a>
+    <a href="#timeline">Povestea</a>
+    <a href="#gallery">Galerie</a>
+    <a href="#quiz">Quiz</a>
+    <a href="#message">Mesaj</a>
+</nav>
+
+<!-- ══════════════════ HERO ══════════════════ -->
+<section id="hero">
+    <div class="float-emoji">🌹</div>
+    <p class="hero-tag">La mulți ani</p>
+    <h1 class="hero-name"><em>Cosmina</em></h1>
+    <p class="hero-desc">Ziua ta specială se apropie ✨</p>
+
+    <div class="countdown-wrapper">
+        <p class="countdown-label">Timp rămas până pe 20 Mai</p>
+        <div class="countdown" id="countdown">
+            <div class="countdown-item">
+                <span class="countdown-number" id="cd-days">--</span>
+                <span class="countdown-unit">Zile</span>
+            </div>
+            <div class="countdown-item">
+                <span class="countdown-number" id="cd-hours">--</span>
+                <span class="countdown-unit">Ore</span>
+            </div>
+            <div class="countdown-item">
+                <span class="countdown-number" id="cd-mins">--</span>
+                <span class="countdown-unit">Min</span>
+            </div>
+            <div class="countdown-item">
+                <span class="countdown-number" id="cd-secs">--</span>
+                <span class="countdown-unit">Sec</span>
+            </div>
+        </div>
+        <p class="birthday-msg" id="birthday-msg">🎉 La mulți ani, Cosmina! 🎉</p>
+    </div>
+</section>
+
+<!-- ══════════════════ TIMELINE ══════════════════ -->
+<section id="timeline">
+    <h2 class="section-title">Povestea noastră</h2>
+    <p class="section-subtitle">Momentele care au contat</p>
+
+    <div class="timeline">
+        <div class="timeline-item">
+            <div class="timeline-dot"></div>
+            <p class="timeline-date">24 Iulie 2024</p>
+            <h3 class="timeline-title">Prima conversație 💬</h3>
+            <p class="timeline-text">Primul mesaj care a schimbat totul. Nici nu știam atunci ce urmează.</p>
+        </div>
+        <div class="timeline-item">
+            <div class="timeline-dot"></div>
+            <p class="timeline-date">15 August 2024</p>
+            <h3 class="timeline-title">Prima întâlnire 🌳</h3>
+            <p class="timeline-text">Herăstrău. O zi pe care n-o voi uita niciodată.</p>
+        </div>
+        <div class="timeline-item">
+            <div class="timeline-dot"></div>
+            <p class="timeline-date">16 August 2024</p>
+            <h3 class="timeline-title">Oficial împreună 💑</h3>
+            <p class="timeline-text">Ziua în care a început cea mai frumoasă perioadă din viața mea.</p>
+        </div>
+        <div class="timeline-item">
+            <div class="timeline-dot" style="background:var(--gold);box-shadow:0 0 0 2px var(--gold)"></div>
+            <p class="timeline-date">20 Mai 2026</p>
+            <h3 class="timeline-title">Ziua ta specială 🎂</h3>
+            <p class="timeline-text">Și acum suntem aici, eu cel mai norocos om din lume că te am pe tine.</p>
+        </div>
+    </div>
+</section>
+
+<!-- ══════════════════ GALLERY ══════════════════ -->
+<section id="gallery">
+    <h2 class="section-title">Momentele noastre</h2>
+    <p class="section-subtitle">O privire în urmă</p>
+
+    <div class="gallery-grid">
+        <!-- Poza principală (wide) — înlocuiește gallery-placeholder cu <img src="poza.jpg" alt="..."> -->
+        <div class="gallery-item wide">
+            <div class="gallery-placeholder">
+                <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                    <rect x="3" y="3" width="18" height="18" rx="2"/>
+                    <circle cx="8.5" cy="8.5" r="1.5"/>
+                    <polyline points="21 15 16 10 5 21"/>
+                </svg>
+                <span>Poza principală</span>
+            </div>
+        </div>
+        <div class="gallery-item">
+            <div class="gallery-placeholder">
+                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                    <rect x="3" y="3" width="18" height="18" rx="2"/>
+                    <circle cx="8.5" cy="8.5" r="1.5"/>
+                    <polyline points="21 15 16 10 5 21"/>
+                </svg>
+                <span>Poza 2</span>
+            </div>
+        </div>
+        <div class="gallery-item">
+            <div class="gallery-placeholder">
+                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                    <rect x="3" y="3" width="18" height="18" rx="2"/>
+                    <circle cx="8.5" cy="8.5" r="1.5"/>
+                    <polyline points="21 15 16 10 5 21"/>
+                </svg>
+                <span>Poza 3</span>
+            </div>
+        </div>
+        <div class="gallery-item">
+            <div class="gallery-placeholder">
+                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                    <rect x="3" y="3" width="18" height="18" rx="2"/>
+                    <circle cx="8.5" cy="8.5" r="1.5"/>
+                    <polyline points="21 15 16 10 5 21"/>
+                </svg>
+                <span>Poza 4</span>
+            </div>
+        </div>
+        <div class="gallery-item">
+            <div class="gallery-placeholder">
+                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                    <rect x="3" y="3" width="18" height="18" rx="2"/>
+                    <circle cx="8.5" cy="8.5" r="1.5"/>
+                    <polyline points="21 15 16 10 5 21"/>
+                </svg>
+                <span>Poza 5</span>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ══════════════════ QUIZ ══════════════════ -->
+<section id="quiz">
+    <h2 class="section-title">Știi totul despre noi?</h2>
+    <p class="section-subtitle">Hai să vedem cât de bine ne cunoști ♡</p>
+
+    <div class="quiz-card">
+        <div class="quiz-progress" id="quiz-progress"></div>
+
+        <div id="quiz-body">
+            <p class="quiz-question" id="quiz-question"></p>
+            <div class="quiz-options" id="quiz-options"></div>
+            <p class="quiz-feedback" id="quiz-feedback"></p>
+            <button class="quiz-next" id="quiz-next" onclick="nextQuestion()">Următoarea întrebare →</button>
+        </div>
+
+        <div class="quiz-result" id="quiz-result">
+            <div class="result-emoji"  id="result-emoji"></div>
+            <div class="result-score"  id="result-score"></div>
+            <p class="result-text"     id="result-text"></p>
+        </div>
+    </div>
+</section>
+
+<!-- ══════════════════ MESSAGE ══════════════════ -->
+<section id="message">
+    <h2 class="section-title">Pentru tine</h2>
+    <p class="section-subtitle">Cu drag ♡</p>
+
+    <div class="letter">
+        <p>Draga mea Cosmina,</p>
+        <p>
+            Există zile care rămân cu tine pentru totdeauna. Ziua în care ți-am scris prima dată,
+            ziua în care ne-am întâlnit la Herăstrău, ziua în care am decis că vreau să fii a mea —
+            toate acestea sunt momente pe care le port cu mine oriunde mă duc.
+        </p>
+        <p>
+            De ziua ta, vreau să îți spun că fiecare zi petrecută cu tine e un cadou.
+            Zâmbetul tău face lumea mai frumoasă, iar eu sunt cel mai norocos om că te am alături.
+        </p>
+        <p>
+            La mulți ani, Cosmina. Îți doresc tot ce ai visat, tot ce meriți —
+            și poate chiar mai mult. ✨
+        </p>
+        <div class="letter-sign">Cu toată dragostea, 🌹</div>
+    </div>
+</section>
+
+<footer>
+    Făcut cu <span class="heart">♥</span> pentru Cosmina &middot; 20 Mai 2026
+</footer>
+
+<script>
+/* ── COUNTDOWN ── */
+function updateCountdown() {
+    const target = new Date('2026-05-20T00:00:00');
+    const now    = new Date();
+    const diff   = target - now;
+
+    if (diff <= 0) {
+        document.getElementById('countdown').style.display    = 'none';
+        document.getElementById('birthday-msg').style.display = 'block';
+        launchConfetti();
+        return;
+    }
+
+    const d = Math.floor(diff / 86400000);
+    const h = Math.floor((diff % 86400000) / 3600000);
+    const m = Math.floor((diff % 3600000)  / 60000);
+    const s = Math.floor((diff % 60000)    / 1000);
+
+    document.getElementById('cd-days').textContent  = String(d).padStart(2,'0');
+    document.getElementById('cd-hours').textContent = String(h).padStart(2,'0');
+    document.getElementById('cd-mins').textContent  = String(m).padStart(2,'0');
+    document.getElementById('cd-secs').textContent  = String(s).padStart(2,'0');
+}
+setInterval(updateCountdown, 1000);
+updateCountdown();
+
+/* ── QUIZ ── */
+const questions = [
+    {
+        q: "Unde ne-am întâlnit prima dată față în față?",
+        options: ["Parcul Floreasca", "Herăstrău", "Cișmigiu", "Parcul Carol"],
+        correct: 1,
+        feedback: "Herăstrău — locul unde a început totul 🌳"
+    },
+    {
+        q: "Când am vorbit prima dată?",
+        options: ["14 iulie 2024", "20 iulie 2024", "24 iulie 2024", "1 august 2024"],
+        correct: 2,
+        feedback: "24 iulie 2024 — primul mesaj care a schimbat totul 💬"
+    },
+    {
+        q: "Cum ne-am cunoscut?",
+        options: ["Bumble", "Hinge", "Instagram", "Tinder"],
+        correct: 3,
+        feedback: "Tinder — uneori algoritmii se îndrăgostesc și ei 😄"
+    },
+    {
+        q: "Care a fost primul meu cadou de Crăciun pentru tine?",
+        options: ["O geantă", "Un inel", "Un parfum", "O pereche de cercei"],
+        correct: 2,
+        feedback: "Un parfum — primul dintre multe cadouri drăguțe 🎁"
+    },
+    {
+        q: "Dar ultimul cadou de Crăciun?",
+        options: ["iPhone", "Dyson Airwrap", "MacBook", "Geantă de designer"],
+        correct: 1,
+        feedback: "Dyson Airwrap — ai meritat fiecare bănuț 💅✨"
+    }
+];
+
+let currentQ = 0, score = 0, answered = false;
+
+function buildProgress() {
+    document.getElementById('quiz-progress').innerHTML =
+        questions.map((_, i) => `<div class="q-dot${i===0?' active':''}" id="qd-${i}"></div>`).join('');
+}
+
+function loadQuestion() {
+    const q = questions[currentQ];
+    document.getElementById('quiz-question').textContent  = q.q;
+    document.getElementById('quiz-feedback').textContent  = '';
+    document.getElementById('quiz-next').style.display    = 'none';
+    document.getElementById('quiz-next').textContent =
+        currentQ === questions.length - 1 ? 'Vezi rezultatul 🎉' : 'Următoarea întrebare →';
+    answered = false;
+
+    document.getElementById('quiz-options').innerHTML =
+        q.options.map((opt, i) =>
+            `<button class="quiz-option" onclick="pick(${i})">${opt}</button>`
+        ).join('');
+
+    questions.forEach((_, i) => {
+        const d = document.getElementById(`qd-${i}`);
+        d.className = 'q-dot' + (i < currentQ ? ' done' : i === currentQ ? ' active' : '');
+    });
+}
+
+function pick(idx) {
+    if (answered) return;
+    answered = true;
+    const q = questions[currentQ];
+    const btns = document.querySelectorAll('.quiz-option');
+    btns.forEach(b => b.disabled = true);
+    if (idx === q.correct) {
+        btns[idx].classList.add('correct');
+        score++;
+    } else {
+        btns[idx].classList.add('wrong');
+        btns[q.correct].classList.add('correct');
+    }
+    document.getElementById('quiz-feedback').textContent =
+        (idx === q.correct ? '✓ ' : '✗ ') + q.feedback;
+    document.getElementById('quiz-next').style.display = 'block';
+}
+
+function nextQuestion() {
+    currentQ++;
+    if (currentQ < questions.length) {
+        loadQuestion();
+    } else {
+        showResult();
+    }
+}
+
+function showResult() {
+    document.getElementById('quiz-body').style.display   = 'none';
+    document.getElementById('quiz-result').style.display = 'block';
+    const pct = score / questions.length;
+    const emoji = pct === 1 ? '🏆✨' : pct >= 0.6 ? '💕' : '😄';
+    const texts = {
+        '🏆✨': 'Perfect! Știi totul despre noi. Te iubesc! 🌹',
+        '💕':   'Bine, dar mai avem amintiri frumoase de creat!',
+        '😄':   'Hai să revedem câteva momente speciale împreună!'
+    };
+    document.getElementById('result-emoji').textContent = emoji;
+    document.getElementById('result-score').textContent = `${score}/${questions.length}`;
+    document.getElementById('result-text').textContent  = texts[emoji];
+}
+
+buildProgress();
+loadQuestion();
+
+/* ── CONFETTI (pe zi de naștere) ── */
+function launchConfetti() {
+    const colors = ['#c9848f','#f2d7d9','#c9a87c','#9e5a65','#fff8'];
+    const wrap   = document.createElement('div');
+    wrap.style.cssText = 'position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:999;overflow:hidden';
+    document.body.appendChild(wrap);
+
+    for (let i = 0; i < 90; i++) {
+        const p   = document.createElement('div');
+        const dur = (Math.random() * 2.5 + 2).toFixed(2);
+        const del = (Math.random() * 2).toFixed(2);
+        const rot = Math.floor(Math.random() * 720);
+        const tx  = Math.floor((Math.random() - 0.5) * 120);
+        const sz  = Math.floor(Math.random() * 7 + 4);
+        const col = colors[Math.floor(Math.random() * colors.length)];
+        const isCircle = Math.random() > 0.5;
+        const kf  = `cf${i}`;
+
+        const style = document.createElement('style');
+        style.textContent = `@keyframes ${kf}{to{top:110%;transform:rotate(${rot}deg) translateX(${tx}px);opacity:0}}`;
+        document.head.appendChild(style);
+
+        p.style.cssText = `
+            position:absolute;
+            width:${sz}px;height:${sz}px;
+            background:${col};
+            border-radius:${isCircle ? '50%' : '2px'};
+            left:${Math.random()*100}%;
+            top:-10px;
+            animation:${kf} ${dur}s linear ${del}s forwards;
+        `;
+        wrap.appendChild(p);
+    }
+}
+
+/* ── SCROLL ANIMATION (timeline) ── */
+const io = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+}, { threshold: 0.15 });
+document.querySelectorAll('.timeline-item').forEach(el => io.observe(el));
+</script>
+
+</body>
+</html>
