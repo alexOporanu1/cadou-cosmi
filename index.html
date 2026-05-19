@@ -734,11 +734,9 @@
 
 <div id="test-zone"></div>
 
-<iframe id="yt-frame" width="1" height="1"
-    style="position:fixed;top:-9999px;left:-9999px;"
-    frameborder="0"
-    allow="autoplay; encrypted-media"
-    allowfullscreen></iframe>
+<audio id="bg-music" loop preload="auto">
+    <source src="muzica/shes-a-rainbow.mp4" type="audio/mp4">
+</audio>
 
 <button id="mute-btn" onclick="toggleMute()" title="Muzică">♪</button>
 
@@ -930,26 +928,31 @@ document.querySelectorAll('.timeline-item').forEach(el => io.observe(el));
 
 /* ── MUSIC ── */
 let musicStarted = false;
-let ytMuted = false;
 
 function startMusic() {
     if (musicStarted) return;
     musicStarted = true;
-    const frame = document.getElementById('yt-frame');
-    frame.src = 'https://www.youtube.com/embed/6c1BThu95d8?autoplay=1&loop=1&playlist=6c1BThu95d8&controls=0&fs=0&rel=0&iv_load_policy=3&modestbranding=1&enablejsapi=1';
-    const btn = document.getElementById('mute-btn');
-    btn.style.display = 'flex';
-    btn.style.alignItems = 'center';
-    btn.style.justifyContent = 'center';
+    const music = document.getElementById('bg-music');
+    music.volume = 0;
+    music.play().then(() => {
+        const btn = document.getElementById('mute-btn');
+        btn.style.display = 'flex';
+        btn.style.alignItems = 'center';
+        btn.style.justifyContent = 'center';
+        let vol = 0;
+        const fade = setInterval(() => {
+            vol = Math.min(vol + 0.04, 0.6);
+            music.volume = vol;
+            if (vol >= 0.6) clearInterval(fade);
+        }, 100);
+    }).catch(() => {});
 }
 
 function toggleMute() {
-    const frame = document.getElementById('yt-frame');
+    const music = document.getElementById('bg-music');
     const btn   = document.getElementById('mute-btn');
-    ytMuted = !ytMuted;
-    const cmd = ytMuted ? 'mute' : 'unMute';
-    frame.contentWindow.postMessage(JSON.stringify({ event: 'command', func: cmd, args: [] }), '*');
-    btn.style.opacity = ytMuted ? '0.35' : '1';
+    music.muted = !music.muted;
+    btn.style.opacity = music.muted ? '0.35' : '1';
 }
 
 /* ── SECRET TEST ZONE ── */
