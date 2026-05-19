@@ -7,7 +7,6 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Raleway:wght@300;400;500;600&display=swap" rel="stylesheet">
-    <script src="https://www.youtube.com/iframe_api"></script>
     <style>
         *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -735,7 +734,11 @@
 
 <div id="test-zone"></div>
 
-<div id="yt-player" style="position:fixed;top:-9999px;left:-9999px;width:1px;height:1px;"></div>
+<iframe id="yt-frame" width="1" height="1"
+    style="position:fixed;top:-9999px;left:-9999px;"
+    frameborder="0"
+    allow="autoplay; encrypted-media"
+    allowfullscreen></iframe>
 
 <button id="mute-btn" onclick="toggleMute()" title="Muzică">♪</button>
 
@@ -925,57 +928,28 @@ const io = new IntersectionObserver(
 );
 document.querySelectorAll('.timeline-item').forEach(el => io.observe(el));
 
-/* ── MUSIC (YouTube IFrame API) ── */
-var ytPlayer, ytReady = false, ytPendingPlay = false;
+/* ── MUSIC ── */
+let musicStarted = false;
+let ytMuted = false;
 
-window.onYouTubeIframeAPIReady = function() {
-    ytPlayer = new YT.Player('yt-player', {
-        videoId: '6c1BThu95d8',
-        playerVars: {
-            autoplay: 0, loop: 1, playlist: '6c1BThu95d8',
-            controls: 0, disablekb: 1, fs: 0,
-            iv_load_policy: 3, modestbranding: 1, rel: 0
-        },
-        events: {
-            onReady: function() {
-                ytReady = true;
-                if (ytPendingPlay) doPlay();
-            }
-        }
-    });
-};
-
-function doPlay() {
-    ytPlayer.setVolume(0);
-    ytPlayer.playVideo();
-    var vol = 0;
-    var fade = setInterval(function() {
-        vol = Math.min(vol + 3, 55);
-        ytPlayer.setVolume(vol);
-        if (vol >= 55) clearInterval(fade);
-    }, 120);
-    var btn = document.getElementById('mute-btn');
+function startMusic() {
+    if (musicStarted) return;
+    musicStarted = true;
+    const frame = document.getElementById('yt-frame');
+    frame.src = 'https://www.youtube.com/embed/6c1BThu95d8?autoplay=1&loop=1&playlist=6c1BThu95d8&controls=0&fs=0&rel=0&iv_load_policy=3&modestbranding=1&enablejsapi=1';
+    const btn = document.getElementById('mute-btn');
     btn.style.display = 'flex';
     btn.style.alignItems = 'center';
     btn.style.justifyContent = 'center';
 }
 
-function startMusic() {
-    if (ytReady) { doPlay(); } else { ytPendingPlay = true; }
-}
-
 function toggleMute() {
-    if (!ytPlayer) return;
-    var btn = document.getElementById('mute-btn');
-    if (ytPlayer.isMuted()) {
-        ytPlayer.unMute();
-        btn.textContent = '♪';
-        btn.style.opacity = '1';
-    } else {
-        ytPlayer.mute();
-        btn.textContent = '♪';
-        btn.style.opacity = '0.35';
-    }
+    const frame = document.getElementById('yt-frame');
+    const btn   = document.getElementById('mute-btn');
+    ytMuted = !ytMuted;
+    const cmd = ytMuted ? 'mute' : 'unMute';
+    frame.contentWindow.postMessage(JSON.stringify({ event: 'command', func: cmd, args: [] }), '*');
+    btn.style.opacity = ytMuted ? '0.35' : '1';
 }
 
 /* ── SECRET TEST ZONE ── */
