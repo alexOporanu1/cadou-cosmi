@@ -1,0 +1,19 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(open *)",
+      "Bash(git init *)",
+      "Bash(git add *)",
+      "Bash(git commit *)",
+      "Bash(gh --version)",
+      "Bash(git remote *)",
+      "Bash(gh repo *)",
+      "Bash(gh api *)",
+      "Bash(mv \"WhatsApp Image 2026-05-14 at 17.56.16.jpeg\" \"poza-cafenea.jpeg\")",
+      "Bash(mv \"WhatsApp Image 2026-05-14 at 18.01.54.jpeg\" \"poza-parc.jpeg\")",
+      "Bash(mv \"WhatsApp Image 2026-05-14 at 17.54.41.jpeg\" \"poza-cinema.jpeg\")",
+      "Bash(mv \"WhatsApp Image 2026-05-14 at 17.56.29.jpeg\" \"poza-mare.jpeg\")",
+      "Bash(mv \"WhatsApp Image 2026-05-14 at 18.06.25.jpeg\" \"poza-craciun.jpeg\")"
+    ]
+  }
+}

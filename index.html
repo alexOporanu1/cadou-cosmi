@@ -125,21 +125,15 @@
             cursor: not-allowed;
         }
 
-        /* ── TEST BUTTON ── */
-        .btn-test {
-            background: none;
-            border: none;
-            color: var(--light-text);
-            font-size: 10px;
-            font-family: 'Raleway', sans-serif;
-            letter-spacing: 1.5px;
-            text-transform: uppercase;
-            cursor: pointer;
-            opacity: 0.28;
-            padding: 6px 8px;
-            transition: opacity 0.2s;
+        /* ── TEST ZONE ── */
+        #test-zone {
+            position: fixed;
+            top: 0; left: 0;
+            width: 48px; height: 48px;
+            z-index: 9999;
+            cursor: default;
+            -webkit-tap-highlight-color: transparent;
         }
-        .btn-test:hover { opacity: 0.65; }
 
         /* ── HERO ── */
         #page-0 .page-scroll {
@@ -517,9 +511,7 @@
             </section>
         </div>
         <div class="page-footer">
-            <div class="footer-left">
-                <button class="btn-test" onclick="testMode()">test</button>
-            </div>
+            <div class="footer-left"></div>
             <div class="page-dots" id="dots-0">
                 <span class="page-dot active"></span>
                 <span class="page-dot"></span>
@@ -687,7 +679,8 @@
                         cerul e negru.
                     </p>
                     <p>
-                        Te iubesc, de pe 16 august 2024 până nu voi fi pe pământ! 🌹
+                        Te iubesc, de pe 16 august 2024 până nu voi mai fi pe pământ! 🌹
+                        Și cu siguranță, și în viața viitoare...
                     </p>
                     <div class="letter-sign">Al tău, pentru totdeauna ♡</div>
                 </div>
@@ -712,6 +705,8 @@
     </div>
 
 </div><!-- #app -->
+
+<div id="test-zone"></div>
 
 <script>
 /* ── PAGE NAVIGATION ── */
