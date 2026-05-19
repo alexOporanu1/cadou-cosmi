@@ -129,10 +129,14 @@
         #test-zone {
             position: fixed;
             top: 0; left: 0;
-            width: 48px; height: 48px;
+            width: 60px; height: 60px;
             z-index: 9999;
             cursor: default;
             -webkit-tap-highlight-color: transparent;
+            background: rgba(0,0,0,0.001);
+            touch-action: manipulation;
+            user-select: none;
+            -webkit-user-select: none;
         }
 
         /* ── HERO ── */
@@ -890,6 +894,21 @@ const io = new IntersectionObserver(
     { threshold: 0.15 }
 );
 document.querySelectorAll('.timeline-item').forEach(el => io.observe(el));
+
+/* ── SECRET TEST ZONE ── */
+(function() {
+    let taps = 0, timer = null;
+    function handleTap(e) {
+        e.preventDefault();
+        taps++;
+        clearTimeout(timer);
+        if (taps >= 3) { taps = 0; onBirthday(); return; }
+        timer = setTimeout(function() { taps = 0; }, 1000);
+    }
+    var zone = document.getElementById('test-zone');
+    zone.addEventListener('touchend', handleTap, { passive: false });
+    zone.addEventListener('click', handleTap);
+}());
 </script>
 </body>
 </html>
